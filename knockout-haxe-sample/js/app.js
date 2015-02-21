@@ -628,7 +628,9 @@ ks.enums.EnumResource.toTemplate = function(resouce) {
 };
 ks.services = {};
 ks.services.api = {};
-ks.services.api.BaseApi = function() { };
+ks.services.api.BaseApi = function() {
+	this.base_resouce_path = "/knockout-haxe-sample/api";
+};
 ks.services.api.BaseApi.__name__ = true;
 ks.services.api.BaseApi.prototype = {
 	baseDoneCallBack: function(response) {
@@ -647,7 +649,8 @@ ks.services.api.RestApi.prototype = {
 	__class__: ks.services.api.RestApi
 };
 ks.services.api.BlogApi = function() {
-	this.resouce = "/api/writer/:writer_id/blog";
+	ks.services.api.BaseApi.call(this);
+	this.resouce = "" + this.base_resouce_path + "/writer/:writer_id/blog";
 };
 ks.services.api.BlogApi.__name__ = true;
 ks.services.api.BlogApi.__interfaces__ = [ks.services.api.RestApi];
@@ -675,7 +678,8 @@ ks.services.api.BlogApi.prototype = $extend(ks.services.api.BaseApi.prototype,{
 	,__class__: ks.services.api.BlogApi
 });
 ks.services.api.WriterApi = function() {
-	this.resouce = "/api/writer/";
+	ks.services.api.BaseApi.call(this);
+	this.resouce = "" + this.base_resouce_path + "/writer/";
 };
 ks.services.api.WriterApi.__name__ = true;
 ks.services.api.WriterApi.__interfaces__ = [ks.services.api.RestApi];
