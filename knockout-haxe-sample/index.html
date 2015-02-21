@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf8">
+  <link rel="stylesheet" href="./css/app.css" media="all">
+  <title>Knockout components for Haxe</title>
+</head>
+<body>
+  <header>
+    <header-nav></header-nav>
+    <div class="jumbotron">
+      <h1>Knockout Haxe Sample Application</h1>
+    </div>
+  </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <blog-header></blog-header>
+        <blog-switch-menu></blog-switch-menu>
+        <blog-content></blog-content>
+      </div>
+      <div class="col-md-3">
+        <blog-writer></blog-writer>
+        <blog-list></blog-list>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p class="text-center">© k-motoyan 2015</p>
+  </footer>
+  <login-form></login-form>
+  <script src="./js/jquery.js"></script>
+  <script src="./js/knockout.js"></script>
+  <script src="./js/bootstrap.js"></script>
+  <script src="./js/app.js"></script>
+</body>
