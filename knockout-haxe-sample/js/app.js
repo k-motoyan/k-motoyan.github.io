@@ -666,7 +666,6 @@ ks.services.api.BlogApi.prototype = $extend(ks.services.api.BaseApi.prototype,{
 		$.getJSON(this.makeResouceUrl(params),{ }).done(done).fail(fail).always(always);
 	}
 	,patch: function(params,done_cb,fail_cb,always_cb) {
-		console.log("This method is imcompatible.");
 	}
 	,makeResouceUrl: function(params) {
 		var url = StringTools.replace(this.resouce,":writer_id",params.writer_id == null?"null":"" + params.writer_id);
@@ -679,7 +678,7 @@ ks.services.api.BlogApi.prototype = $extend(ks.services.api.BaseApi.prototype,{
 });
 ks.services.api.WriterApi = function() {
 	ks.services.api.BaseApi.call(this);
-	this.resouce = "" + this.base_resouce_path + "/writer/";
+	this.resouce = "" + this.base_resouce_path + "/writer";
 };
 ks.services.api.WriterApi.__name__ = true;
 ks.services.api.WriterApi.__interfaces__ = [ks.services.api.RestApi];
@@ -694,10 +693,9 @@ ks.services.api.WriterApi.prototype = $extend(ks.services.api.BaseApi.prototype,
 		if(fail_cb != null) fail = fail_cb; else fail = $bind(this,this.baseFailCallBack);
 		var always;
 		if(always_cb != null) always = always_cb; else always = $bind(this,this.baseAlwaysCallBack);
-		$.getJSON("" + this.resouce + id + ".json",{ }).done(done).fail(fail).always(always);
+		$.getJSON("" + this.resouce + "/" + id + ".json",{ }).done(done).fail(fail).always(always);
 	}
 	,patch: function(params,done_cb,fail_cb,always_cb) {
-		console.log("This method is imcompatible.");
 	}
 	,__class__: ks.services.api.WriterApi
 });
