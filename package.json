@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-jade": "latest",
+    "gulp-stylus": "latest",
+    "stylus": "latest",
+    "jade": "latest"
+  }
+}
