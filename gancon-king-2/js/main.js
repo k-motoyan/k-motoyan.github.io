@@ -8154,6 +8154,7 @@ var _user$project$Main$avilityTable = function (model) {
 								_elm_lang$html$Html$th,
 								_elm_lang$core$Native_List.fromArray(
 									[
+										_elm_lang$html$Html_Attributes$class('mui--text-right'),
 										_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
 									]),
 								_elm_lang$core$Native_List.fromArray(
@@ -8164,6 +8165,7 @@ var _user$project$Main$avilityTable = function (model) {
 								_elm_lang$html$Html$th,
 								_elm_lang$core$Native_List.fromArray(
 									[
+										_elm_lang$html$Html_Attributes$class('mui--text-right'),
 										_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
 									]),
 								_elm_lang$core$Native_List.fromArray(
@@ -8174,6 +8176,7 @@ var _user$project$Main$avilityTable = function (model) {
 								_elm_lang$html$Html$th,
 								_elm_lang$core$Native_List.fromArray(
 									[
+										_elm_lang$html$Html_Attributes$class('mui--text-right'),
 										_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
 									]),
 								_elm_lang$core$Native_List.fromArray(
