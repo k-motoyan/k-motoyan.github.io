@@ -463,9 +463,9 @@ avilityTable model =
         []
         [ tr
             []
-            [ th [ style miniFont ] [ text "" ]
-            , th [ style miniFont ] [ text "加算ポイント" ]
-            , th [ style miniFont ] [ text "パラメーター" ]
+            [ th [ class "mui--text-right", style miniFont ] [ text "" ]
+            , th [ class "mui--text-right", style miniFont ] [ text "加算ポイント" ]
+            , th [ class "mui--text-right", style miniFont ] [ text "パラメーター" ]
             ]
         ]
     , tbody
