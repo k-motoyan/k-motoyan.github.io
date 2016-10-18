@@ -1,0 +1,8 @@
+{
+  "name": "gancon-king-2",
+  "version": "0.0.0",
+  "description": "",
+  "devDependencies": {
+    "elm-server": "^1.0.0"
+  }
+}

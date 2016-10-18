@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-latest/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <title>第二回ガンコン王 優勝賞品シミュレーター</title>
+  </head>
+  <body>
+    <style>
+      body {
+        width: 100%;
+        height: 100%;
+        background: #BBDEFB;
+      }
+      header {
+        margin-bottom: 20px;
+        padding: 5px 10px;
+      }
+      header h1 {
+        margin: 0;
+      }
+    </style>
+    <header class="mui-appbar">
+      <h1>第二回ガンコン王 優勝賞品シミュレーター</h1>
+    </header>
+    <main>
+      <div id="app" class="mui-container"></div>
+    </main>
+    <footer>
+      <p class="mui--text-center mui--text-white">© k-motoyan 2015</p>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script type="text/javascript">
+      var main = document.getElementById('app');
+      Elm.Main.embed(main);
+    </script>
+  </body>
+</html>

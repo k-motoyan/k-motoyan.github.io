@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+var path = require('path'),
+    server = require('elm-server');
+
+var current_path = path.resolve(__dirname, '..'),
+    src_path = path.join(current_path, 'src'),
+    watch_path = path.join(current_path, 'js'),
+    output_path = path.join(current_path, 'js', 'main.js'),
+    main_path = path.join(src_path, 'Main.elm');
+
+server(main_path, {
+  output: output_path,
+  watch: current_path
+});
