@@ -7901,6 +7901,33 @@ var _elm_lang$html$Html_Lazy$lazy3 = _elm_lang$virtual_dom$VirtualDom$lazy3;
 var _elm_lang$html$Html_Lazy$lazy2 = _elm_lang$virtual_dom$VirtualDom$lazy2;
 var _elm_lang$html$Html_Lazy$lazy = _elm_lang$virtual_dom$VirtualDom$lazy;
 
+var _user$project$Style$miniFont = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'font-size', _1: '.7em'}
+	]);
+var _user$project$Style$modalContents = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'margin', _1: 'auto'},
+		{ctor: '_Tuple2', _0: 'padding', _1: '15px'},
+		{ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+		{ctor: '_Tuple2', _0: 'top', _1: '0px'},
+		{ctor: '_Tuple2', _0: 'bottom', _1: '0px'},
+		{ctor: '_Tuple2', _0: 'left', _1: '0px'},
+		{ctor: '_Tuple2', _0: 'right', _1: '0px'},
+		{ctor: '_Tuple2', _0: 'width', _1: '80%'},
+		{ctor: '_Tuple2', _0: 'height', _1: '80%'},
+		{ctor: '_Tuple2', _0: 'background', _1: 'white'}
+	]);
+var _user$project$Style$modal = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'position', _1: 'fixed'},
+		{ctor: '_Tuple2', _0: 'top', _1: '0px'},
+		{ctor: '_Tuple2', _0: 'left', _1: '0px'},
+		{ctor: '_Tuple2', _0: 'width', _1: '100%'},
+		{ctor: '_Tuple2', _0: 'height', _1: '100%'},
+		{ctor: '_Tuple2', _0: 'background', _1: 'rgba(0,0,0,.5)'},
+		{ctor: '_Tuple2', _0: 'transition', _1: 'all .1s linear'}
+	]);
 var _user$project$Style$avilityBox = _elm_lang$core$Native_List.fromArray(
 	[
 		{ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
@@ -7919,10 +7946,259 @@ var _user$project$Style$simpleBox = _elm_lang$core$Native_List.fromArray(
 		{ctor: '_Tuple2', _0: 'margin-bottom', _1: '10px'}
 	]);
 
+var _user$project$Main$restPointValidationRow = function (restPoint) {
+	var _p0 = (_elm_lang$core$Native_Utils.cmp(restPoint, 0) < 0) ? {
+		ctor: '_Tuple2',
+		_0: A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(
+				_elm_lang$core$Basics$abs(restPoint)),
+			'ポイントオーバーです。'),
+		_1: {ctor: '_Tuple2', _0: 'color', _1: 'red'}
+	} : ((_elm_lang$core$Native_Utils.cmp(restPoint, 0) > 0) ? {
+		ctor: '_Tuple2',
+		_0: A2(
+			_elm_lang$core$Basics_ops['++'],
+			'あと',
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Basics$toString(restPoint),
+				'ポイント加算出来ます。')),
+		_1: {ctor: '_Tuple2', _0: 'color', _1: '#BBDEFB'}
+	} : {
+		ctor: '_Tuple2',
+		_0: 'ポイントをピッタリ使い切りました( ･∀･)=b',
+		_1: {ctor: '_Tuple2', _0: 'color', _1: '#2196F3'}
+	});
+	var message = _p0._0;
+	var colorStyle = _p0._1;
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('mui--text-center'),
+				_elm_lang$html$Html_Attributes$style(
+				A2(
+					_elm_lang$core$List_ops['::'],
+					colorStyle,
+					_elm_lang$core$Native_List.fromArray(
+						[])))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(message)
+			]));
+};
+var _user$project$Main$avilityTotalRow = function (model) {
+	var totalPoint = (((((model.attackNearPoint + model.attackFarPoint) + model.defensePoint) + model.agilityPoint) + model.siegePoint) + model.intelliPoint) + model.skill.consumePoint;
+	var statusColor = _elm_lang$core$Native_Utils.eq(totalPoint, model.cost.total) ? {ctor: '_Tuple2', _0: 'color', _1: '#2196F3'} : ((_elm_lang$core$Native_Utils.cmp(totalPoint, model.cost.total) > 0) ? {ctor: '_Tuple2', _0: 'color', _1: 'red'} : {ctor: '_Tuple2', _0: 'color', _1: '#BBDEFB'});
+	return A2(
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mui--text-right'),
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mui--text-right'),
+						_elm_lang$html$Html_Attributes$style(
+						A2(_elm_lang$core$List_ops['::'], statusColor, _user$project$Style$miniFont))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(totalPoint))
+					]))
+			]));
+};
+var _user$project$Main$skillTableRow = function (skill) {
+	return A2(
+		_elm_lang$html$Html$tr,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('スキル')
+					])),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mui--text-right'),
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(skill.name)
+					])),
+				A2(
+				_elm_lang$html$Html$td,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('mui--text-right'),
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							'+',
+							_elm_lang$core$Basics$toString(skill.consumePoint)))
+					]))
+			]));
+};
 var _user$project$Main$avility = F3(
 	function (point, rate, base) {
 		return _elm_lang$core$Basics$toString((rate * point) + base);
 	});
+var _user$project$Main$avilityTableRow = F5(
+	function (name, point, limit, rate, base) {
+		var accentStyle = (_elm_lang$core$Native_Utils.cmp(point, limit) > 0) ? {ctor: '_Tuple2', _0: 'color', _1: 'red'} : ((_elm_lang$core$Native_Utils.cmp(point, 0) > 0) ? {ctor: '_Tuple2', _0: 'color', _1: '#2196F3'} : {ctor: '_Tuple2', _0: 'color', _1: ''});
+		var pointText = A2(
+			_elm_lang$core$Basics_ops['++'],
+			'+',
+			_elm_lang$core$Basics$toString(point));
+		var avilityText = _elm_lang$core$Basics$toString(
+			A3(_user$project$Main$avility, point, rate, base));
+		return A2(
+			_elm_lang$html$Html$tr,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$td,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(name)
+						])),
+					A2(
+					_elm_lang$html$Html$td,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('mui--text-right'),
+							_elm_lang$html$Html_Attributes$style(
+							A2(_elm_lang$core$List_ops['::'], accentStyle, _user$project$Style$miniFont))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(avilityText)
+						])),
+					A2(
+					_elm_lang$html$Html$td,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('mui--text-right'),
+							_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(pointText)
+						]))
+				]));
+	});
+var _user$project$Main$avilityTable = function (model) {
+	return A2(
+		_elm_lang$html$Html$table,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('mui-table mui-table--bordered')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$thead,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$tr,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(
+								_elm_lang$html$Html$th,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('')
+									])),
+								A2(
+								_elm_lang$html$Html$th,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('加算ポイント')
+									])),
+								A2(
+								_elm_lang$html$Html$th,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('パラメーター')
+									]))
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$tbody,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A5(_user$project$Main$avilityTableRow, '近接', model.attackNearPoint, model.cost.limit, 40, 1600),
+						A5(_user$project$Main$avilityTableRow, '遠隔', model.attackFarPoint, model.cost.limit, 40, 1600),
+						A5(_user$project$Main$avilityTableRow, '装甲', model.defensePoint, model.cost.limit, 37, 1600),
+						A5(_user$project$Main$avilityTableRow, '機動力', model.agilityPoint, model.cost.limit, 1, 150),
+						A5(_user$project$Main$avilityTableRow, '占拠力', model.siegePoint, model.cost.limit, 1, 30),
+						A5(_user$project$Main$avilityTableRow, '演算力', model.intelliPoint, model.cost.limit, 1, 100),
+						_user$project$Main$skillTableRow(model.skill),
+						_user$project$Main$avilityTotalRow(model)
+					]))
+			]));
+};
 var _user$project$Main$validationField = F2(
 	function (point, limit) {
 		var display = (_elm_lang$core$Native_Utils.cmp(point, limit) > 0) ? 'inline-block' : 'none';
@@ -8090,9 +8366,9 @@ var _user$project$Main$selectSkill = function (skillText) {
 				return _elm_lang$core$Native_Utils.eq(s.name, skillText);
 			},
 			_user$project$Main$skills));
-	var _p0 = selectedSkill;
-	if (_p0.ctor === 'Just') {
-		return _p0._0;
+	var _p1 = selectedSkill;
+	if (_p1.ctor === 'Just') {
+		return _p1._0;
 	} else {
 		return _user$project$Main$defaultSkill;
 	}
@@ -8117,25 +8393,25 @@ var _user$project$Main$selectCost = function (costText) {
 				return _elm_lang$core$Native_Utils.eq(c.value, cost);
 			},
 			_user$project$Main$costs));
-	var _p1 = selectedCost;
-	if (_p1.ctor === 'Just') {
-		return _p1._0;
+	var _p2 = selectedCost;
+	if (_p2.ctor === 'Just') {
+		return _p2._0;
 	} else {
 		return _user$project$Main$defaultCost;
 	}
 };
-var _user$project$Main$initialModel = {cost: _user$project$Main$defaultCost, skill: _user$project$Main$defaultSkill, attackNearPoint: 0, attackFarPoint: 0, defensePoint: 0, agilityPoint: 0, siegePoint: 0, intelliPoint: 0};
+var _user$project$Main$initialModel = {cost: _user$project$Main$defaultCost, skill: _user$project$Main$defaultSkill, attackNearPoint: 0, attackFarPoint: 0, defensePoint: 0, agilityPoint: 0, siegePoint: 0, intelliPoint: 0, modalVisibility: false};
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p2 = msg;
-		switch (_p2.ctor) {
+		var _p3 = msg;
+		switch (_p3.ctor) {
 			case 'ChangedCost':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							cost: _user$project$Main$selectCost(_p2._0)
+							cost: _user$project$Main$selectCost(_p3._0)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8145,7 +8421,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							skill: _user$project$Main$selectSkill(_p2._0)
+							skill: _user$project$Main$selectSkill(_p3._0)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8155,7 +8431,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							attackNearPoint: A2(_user$project$Main$pointTextToInt, _p2._0, model.attackNearPoint)
+							attackNearPoint: A2(_user$project$Main$pointTextToInt, _p3._0, model.attackNearPoint)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8165,7 +8441,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							attackFarPoint: A2(_user$project$Main$pointTextToInt, _p2._0, model.attackFarPoint)
+							attackFarPoint: A2(_user$project$Main$pointTextToInt, _p3._0, model.attackFarPoint)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8175,7 +8451,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							defensePoint: A2(_user$project$Main$pointTextToInt, _p2._0, model.defensePoint)
+							defensePoint: A2(_user$project$Main$pointTextToInt, _p3._0, model.defensePoint)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8185,7 +8461,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							agilityPoint: A2(_user$project$Main$pointTextToInt, _p2._0, model.agilityPoint)
+							agilityPoint: A2(_user$project$Main$pointTextToInt, _p3._0, model.agilityPoint)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8195,7 +8471,7 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							siegePoint: A2(_user$project$Main$pointTextToInt, _p2._0, model.siegePoint)
+							siegePoint: A2(_user$project$Main$pointTextToInt, _p3._0, model.siegePoint)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
@@ -8205,22 +8481,38 @@ var _user$project$Main$update = F2(
 					_elm_lang$core$Native_Utils.update(
 						model,
 						{
-							intelliPoint: A2(_user$project$Main$pointTextToInt, _p2._0, model.intelliPoint)
+							intelliPoint: A2(_user$project$Main$pointTextToInt, _p3._0, model.intelliPoint)
 						}),
 					_elm_lang$core$Native_List.fromArray(
 						[]));
-			default:
+			case 'Clear':
 				return A2(
 					_elm_lang$core$Platform_Cmd_ops['!'],
 					_user$project$Main$initialModel,
 					_elm_lang$core$Native_List.fromArray(
 						[]));
+			case 'ShowModal':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{modalVisibility: true}),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{modalVisibility: false}),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
 		}
 	});
 var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initialModel, _1: _elm_lang$core$Platform_Cmd$none};
-var _user$project$Main$Model = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {cost: a, skill: b, attackNearPoint: c, attackFarPoint: d, defensePoint: e, agilityPoint: f, siegePoint: g, intelliPoint: h};
+var _user$project$Main$Model = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {cost: a, skill: b, attackNearPoint: c, attackFarPoint: d, defensePoint: e, agilityPoint: f, siegePoint: g, intelliPoint: h, modalVisibility: i};
 	});
 var _user$project$Main$Cost = F3(
 	function (a, b, c) {
@@ -8230,6 +8522,53 @@ var _user$project$Main$Skill = F4(
 	function (a, b, c, d) {
 		return {consumePoint: a, isNew: b, name: c, desc: d};
 	});
+var _user$project$Main$HideModal = {ctor: 'HideModal'};
+var _user$project$Main$modalView = function (model) {
+	var opacity = model.modalVisibility ? '1' : '0';
+	var visibility = model.modalVisibility ? 'visible' : 'hidden';
+	var modalStyles = A2(
+		_elm_lang$core$List_ops['::'],
+		{ctor: '_Tuple2', _0: 'opacity', _1: opacity},
+		A2(
+			_elm_lang$core$List_ops['::'],
+			{ctor: '_Tuple2', _0: 'visibility', _1: visibility},
+			_user$project$Style$modal));
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(modalStyles),
+				_elm_lang$html$Html_Events$onClick(_user$project$Main$HideModal)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$modalContents)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'コスト',
+									_elm_lang$core$Basics$toString(model.cost.value)))
+							])),
+						_user$project$Main$avilityTable(model),
+						_user$project$Main$restPointValidationRow(
+						_user$project$Main$computeRestPoint(model))
+					]))
+			]));
+};
+var _user$project$Main$ShowModal = {ctor: 'ShowModal'};
 var _user$project$Main$Clear = {ctor: 'Clear'};
 var _user$project$Main$submitField = A2(
 	_elm_lang$html$Html$div,
@@ -8247,6 +8586,17 @@ var _user$project$Main$submitField = A2(
 			_elm_lang$core$Native_List.fromArray(
 				[
 					_elm_lang$html$Html$text('クリア')
+				])),
+			A2(
+			_elm_lang$html$Html$button,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('mui-btn mui-btn--small mui-btn--primary mui-btn--raised'),
+					_elm_lang$html$Html_Events$onClick(_user$project$Main$ShowModal)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('確認')
 				]))
 		]));
 var _user$project$Main$InputIntelli = function (a) {
@@ -8367,7 +8717,8 @@ var _user$project$Main$skillField = function (skill) {
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('mui-panel')
+						_elm_lang$html$Html_Attributes$class('mui-panel'),
+						_elm_lang$html$Html_Attributes$style(_user$project$Style$miniFont)
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
@@ -8447,7 +8798,8 @@ var _user$project$Main$view = function (model) {
 				A3(_elm_lang$html$Html_Lazy$lazy2, _user$project$Main$validationField, model.siegePoint, model.cost.limit),
 				A2(_elm_lang$html$Html_Lazy$lazy, _user$project$Main$inputIntelliPoint, model.intelliPoint),
 				A3(_elm_lang$html$Html_Lazy$lazy2, _user$project$Main$validationField, model.intelliPoint, model.cost.limit),
-				_user$project$Main$submitField
+				_user$project$Main$submitField,
+				A2(_elm_lang$html$Html_Lazy$lazy, _user$project$Main$modalView, model)
 			]));
 };
 var _user$project$Main$main = {

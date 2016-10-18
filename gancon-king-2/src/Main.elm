@@ -38,6 +38,7 @@ type alias Model =
   , agilityPoint : Int
   , siegePoint : Int
   , intelliPoint : Int
+  , modalVisibility : Bool
   }
 
 
@@ -66,6 +67,7 @@ initialModel =
   , agilityPoint = 0
   , siegePoint = 0
   , intelliPoint = 0
+  , modalVisibility = False
   }
 
 
@@ -75,6 +77,7 @@ defaultCost =
     maybeDefault = { value = 0, total = 0, limit = 0 }
   in
     List.head costs |> Maybe.withDefault maybeDefault
+
 
 defaultSkill : Skill
 defaultSkill =
@@ -192,6 +195,8 @@ type Msg
   | InputSeage String
   | InputIntelli String
   | Clear
+  | ShowModal
+  | HideModal
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -223,6 +228,12 @@ update msg model =
 
     Clear ->
       initialModel ! []
+
+    ShowModal ->
+      { model | modalVisibility = True } ! []
+
+    HideModal ->
+      { model | modalVisibility = False } ! []
 
 
 pointTextToInt : String -> Int -> Int
@@ -284,6 +295,7 @@ view model =
     , lazy inputIntelliPoint model.intelliPoint
     , lazy2 validationField model.intelliPoint model.cost.limit
     , submitField
+    , lazy modalView model
     ]
 
 
@@ -333,7 +345,7 @@ skillField skill =
           [ select [ onInput ChangedSkill ] <| List.map optionBuilder skills
           , label [] [ text "スキル" ]
           ]
-      , div [ class "mui-panel" ] [ text skill.desc ]
+      , div [ class "mui-panel", style miniFont ] [ text skill.desc ]
       ]
 
 
@@ -371,7 +383,16 @@ submitField : Html Msg
 submitField =
   div
     []
-    [ button [ class "mui-btn mui-btn--small mui-btn--raised", onClick Clear ] [ text "クリア" ]
+    [ button
+        [ class "mui-btn mui-btn--small mui-btn--raised"
+        , onClick Clear
+        ]
+        [ text "クリア" ]
+    , button
+        [ class "mui-btn mui-btn--small mui-btn--primary mui-btn--raised"
+        , onClick ShowModal
+        ]
+        [ text "確認" ]
     ]
 
 
@@ -409,5 +430,128 @@ validationField point limit =
       ]
       [ span [] [ text "振り分けポイントオーバー" ] ]
 
+
 avility : Int -> Int -> Int -> String
 avility point rate base = (rate * point) + base |> toString
+
+
+-- ModalView
+
+
+modalView : Model -> Html Msg
+modalView model =
+  let
+    visibility = if model.modalVisibility then "visible" else "hidden"
+    opacity = if model.modalVisibility then "1" else "0"
+    modalStyles = ("opacity", opacity) :: ("visibility", visibility) :: modal
+  in
+    div
+      [ style modalStyles, onClick HideModal ]
+      [ div
+          [ style modalContents ]
+          [ div [] [ text <| "コスト" ++ (toString model.cost.value) ]
+          , avilityTable model
+          , restPointValidationRow <| computeRestPoint model
+          ]
+      ]
+
+avilityTable : Model -> Html Msg
+avilityTable model =
+  table
+    [ class "mui-table mui-table--bordered" ]
+    [ thead
+        []
+        [ tr
+            []
+            [ th [ style miniFont ] [ text "" ]
+            , th [ style miniFont ] [ text "加算ポイント" ]
+            , th [ style miniFont ] [ text "パラメーター" ]
+            ]
+        ]
+    , tbody
+        []
+        [ avilityTableRow "近接" model.attackNearPoint model.cost.limit 40 1600
+        , avilityTableRow "遠隔" model.attackFarPoint model.cost.limit 40 1600
+        , avilityTableRow "装甲" model.defensePoint model.cost.limit 37 1600
+        , avilityTableRow "機動力" model.agilityPoint model.cost.limit 1 150
+        , avilityTableRow "占拠力" model.siegePoint model.cost.limit 1 30
+        , avilityTableRow "演算力" model.intelliPoint model.cost.limit 1 100
+        , skillTableRow model.skill
+        , avilityTotalRow model
+        ]
+    ]
+
+
+avilityTableRow : String -> Int -> Int -> Int -> Int -> Html Msg
+avilityTableRow name point limit rate base =
+  let
+    avilityText = toString <| avility point rate base
+
+    pointText = "+" ++ (toString point)
+
+    accentStyle =
+      if point > limit then
+        ("color", "red")
+      else if point > 0 then
+        ("color", "#2196F3")
+      else
+        ("color", "")
+  in
+    tr
+      []
+      [ td [ style miniFont ] [ text name ]
+      , td [ class "mui--text-right", style <| accentStyle :: miniFont ] [ text avilityText ]
+      , td [ class "mui--text-right", style miniFont ] [ text pointText ]
+      ]
+
+
+skillTableRow : Skill -> Html Msg
+skillTableRow skill =
+  tr
+    []
+    [ td [ style miniFont ] [ text "スキル" ]
+    , td [ class "mui--text-right", style miniFont ] [ text skill.name ]
+    , td [ class "mui--text-right", style miniFont ] [ text <| "+" ++ (toString skill.consumePoint) ]
+    ]
+
+
+avilityTotalRow : Model -> Html Msg
+avilityTotalRow model =
+  let
+    totalPoint
+      = model.attackNearPoint
+      + model.attackFarPoint
+      + model.defensePoint
+      + model.agilityPoint
+      + model.siegePoint
+      + model.intelliPoint
+      + model.skill.consumePoint
+
+    statusColor =
+      if totalPoint == model.cost.total then
+        ("color", "#2196F3")
+      else if totalPoint > model.cost.total then
+        ("color", "red")
+      else
+        ("color", "#BBDEFB")
+  in
+    tr
+      []
+      [ td [ style miniFont ] []
+      , td [ class "mui--text-right", style miniFont ] []
+      , td [ class "mui--text-right", style <| statusColor :: miniFont ] [ text <| toString totalPoint ]
+      ]
+
+
+restPointValidationRow : Int -> Html Msg
+restPointValidationRow restPoint =
+  let
+    (message, colorStyle) =
+      if restPoint < 0 then
+        ((toString <| abs restPoint) ++ "ポイントオーバーです。", ("color", "red"))
+      else if restPoint > 0 then
+        ("あと" ++ (toString restPoint) ++ "ポイント加算出来ます。", ("color", "#BBDEFB"))
+      else
+        ("ポイントをピッタリ使い切りました( ･∀･)=b", ("color", "#2196F3"))
+  in
+    div [ class "mui--text-center", style <| colorStyle :: [] ] [ text message ]
