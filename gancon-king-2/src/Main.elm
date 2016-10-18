@@ -464,8 +464,8 @@ avilityTable model =
         [ tr
             []
             [ th [ class "mui--text-right", style miniFont ] [ text "" ]
-            , th [ class "mui--text-right", style miniFont ] [ text "加算ポイント" ]
             , th [ class "mui--text-right", style miniFont ] [ text "パラメーター" ]
+            , th [ class "mui--text-right", style miniFont ] [ text "加算ポイント" ]
             ]
         ]
     , tbody
@@ -554,4 +554,4 @@ restPointValidationRow restPoint =
       else
         ("ポイントをピッタリ使い切りました( ･∀･)=b", ("color", "#2196F3"))
   in
-    div [ class "mui--text-center", style <| colorStyle :: [] ] [ text message ]
+    div [ class "mui--text-center", style <| colorStyle :: miniFont ] [ text message ]

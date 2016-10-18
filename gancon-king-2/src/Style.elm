@@ -28,7 +28,7 @@ modal =
   , ("width", "100%")
   , ("height", "100%")
   , ("background", "rgba(0,0,0,.5)")
-  , ("transition", "all .1s linear")
+  , ("transition", "all .2s linear")
   ]
 
 

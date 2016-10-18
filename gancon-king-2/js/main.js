@@ -7926,7 +7926,7 @@ var _user$project$Style$modal = _elm_lang$core$Native_List.fromArray(
 		{ctor: '_Tuple2', _0: 'width', _1: '100%'},
 		{ctor: '_Tuple2', _0: 'height', _1: '100%'},
 		{ctor: '_Tuple2', _0: 'background', _1: 'rgba(0,0,0,.5)'},
-		{ctor: '_Tuple2', _0: 'transition', _1: 'all .1s linear'}
+		{ctor: '_Tuple2', _0: 'transition', _1: 'all .2s linear'}
 	]);
 var _user$project$Style$avilityBox = _elm_lang$core$Native_List.fromArray(
 	[
@@ -7978,11 +7978,7 @@ var _user$project$Main$restPointValidationRow = function (restPoint) {
 			[
 				_elm_lang$html$Html_Attributes$class('mui--text-center'),
 				_elm_lang$html$Html_Attributes$style(
-				A2(
-					_elm_lang$core$List_ops['::'],
-					colorStyle,
-					_elm_lang$core$Native_List.fromArray(
-						[])))
+				A2(_elm_lang$core$List_ops['::'], colorStyle, _user$project$Style$miniFont))
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -8170,7 +8166,7 @@ var _user$project$Main$avilityTable = function (model) {
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('加算ポイント')
+										_elm_lang$html$Html$text('パラメーター')
 									])),
 								A2(
 								_elm_lang$html$Html$th,
@@ -8181,7 +8177,7 @@ var _user$project$Main$avilityTable = function (model) {
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('パラメーター')
+										_elm_lang$html$Html$text('加算ポイント')
 									]))
 							]))
 					])),
